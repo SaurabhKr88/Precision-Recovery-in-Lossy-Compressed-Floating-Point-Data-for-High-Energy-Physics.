@@ -1,4 +1,4 @@
-Precision Recovery in Lossy-Compressed Floating-Point Data for High Energy Physics
+#Precision Recovery in Lossy-Compressed Floating-Point Data for High Energy Physics
 <br>
 Overview
 This project explores lossy floating-point compression by manipulating the least significant bits of the mantissa in IEEE 754 floating-point representation. The goal is to analyze how compression affects data storage and statistical properties, ensuring an optimal balance between precision and storage efficiency.
@@ -14,10 +14,10 @@ Steps Performed
         Gaussian Distribution: Mean = 0, Standard Deviation = 1.
         Exponential Distribution: Mean = 1.0.
     <br>
-        N = 100000
+       ''' N = 100000
         uniform_data = np.random.uniform(0, 1, N)
         gaussian_data = np.random.normal(0, 1, N)
-        exponential_data = np.random.exponential(1.0, N)
+        exponential_data = np.random.exponential(1.0, N)'''
     <br>
     Step 2: Implement Lossy Compression
     To compress the data, we zero out between 8 and 16 bits of the mantissa while preserving the exponent and sign bit.
