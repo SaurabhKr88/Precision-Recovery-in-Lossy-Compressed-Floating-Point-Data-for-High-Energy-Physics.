@@ -126,3 +126,9 @@ plot_distributions(uniform_data, compressed_uniform, "Uniform Distribution")
 plot_distributions(gaussian_data, compressed_gaussian, "Gaussian Distribution")
 plot_distributions(exponential_data, compressed_exponential, "Exponential Distribution")
 ```
+---
+### **Optimal compression levels for different use cases**
+Optimal compression levels depend on whether slight numerical errors are noticeable:
+
+- In image and audio processing, small errors are not perceptible, allowing higher compression.
+- In systems where storage space is the main priority, more aggressive compression can be used, even at the cost of precision.
