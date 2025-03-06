@@ -14,14 +14,14 @@ Steps Performed
         Gaussian Distribution: Mean = 0, Standard Deviation = 1.
         Exponential Distribution: Mean = 1.0.
     <br>
-       ''' N = 100000
+       ``` N = 100000
         uniform_data = np.random.uniform(0, 1, N)
         gaussian_data = np.random.normal(0, 1, N)
-        exponential_data = np.random.exponential(1.0, N)'''
+        exponential_data = np.random.exponential(1.0, N)```
     <br>
     Step 2: Implement Lossy Compression
     To compress the data, we zero out between 8 and 16 bits of the mantissa while preserving the exponent and sign bit.
-       def float_to_bin(f):
+       ```def float_to_bin(f):
         """Convert float to IEEE 754 binary representation (as an integer)."""
         return struct.unpack('!I', struct.pack('!f', f))[0]
         def bin_to_float(b):
@@ -33,18 +33,18 @@ Steps Performed
     b = float_to_bin(f)  # Convert float to IEEE 754 binary
     mask = ~((1 << bits_to_zero) - 1)  # Create a mask to zero out bits
     compressed_b = b & mask  # Apply mask
-    return bin_to_float(compressed_b)  # Convert back to float
+    return bin_to_float(compressed_b)  # Convert back to float```
 <br>
     Apply Compression to Entire Dataset
-        def apply_compression(data, bits=8):
+        ```def apply_compression(data, bits=8):
             return np.array([compress_float(f, bits) for f in data], dtype=np.float32)
         compressed_uniform = apply_compression(uniform_data, 8)
         compressed_gaussian = apply_compression(gaussian_data, 8)
-        compressed_exponential = apply_compression(exponential_data, 8)
+        compressed_exponential = apply_compression(exponential_data, 8)```
 <br>
     Step 3: Save Data to Binary Files
     Both the original and compressed datasets are stored in binary format for efficient storage.
-    def save_binary(filename, data):
+    ```def save_binary(filename, data):
         data.tofile(filename)
     # Save original data
     save_binary("uniform_original.bin", uniform_data)
@@ -53,7 +53,7 @@ Steps Performed
     # Save compressed data
     save_binary("uniform_compressed.bin", compressed_uniform)
     save_binary("gaussian_compressed.bin", compressed_gaussian)
-    save_binary("exponential_compressed.bin", compressed_exponential)
+    save_binary("exponential_compressed.bin", compressed_exponential)```
 <br>
     To check storage savings, run:
     ls -lh *.bin
@@ -62,7 +62,7 @@ Steps Performed
         Mean
         Variance
         Mean Squared Error (MSE)
-    def compute_statistics(original, compressed):
+    ```def compute_statistics(original, compressed):
         mse = np.mean((original - compressed) ** 2)
         stats = {
             "Mean (Original)": np.mean(original),
@@ -78,11 +78,11 @@ Steps Performed
     stats_exponential = compute_statistics(exponential_data, compressed_exponential)
     print("Uniform:", stats_uniform)
     print("Gaussian:", stats_gaussian)
-    print("Exponential:", stats_exponential)
+    print("Exponential:", stats_exponential)```
     <br>
     Step 5: Visualize Distribution Changes
     We plot histograms of the original and compressed datasets to analyze how compression affects their distributions.
-    def plot_distributions(original, compressed, title):
+    ```def plot_distributions(original, compressed, title):
         plt.figure(figsize=(8, 5))
         plt.hist(original, bins=100, alpha=0.6, label="Original", density=True)
         plt.hist(compressed, bins=100, alpha=0.6, label="Compressed", density=True)
@@ -93,7 +93,7 @@ Steps Performed
         plt.show()
     plot_distributions(uniform_data, compressed_uniform, "Uniform Distribution")
     plot_distributions(gaussian_data, compressed_gaussian, "Gaussian Distribution")
-    plot_distributions(exponential_data, compressed_exponential, "Exponential Distribution")
+    plot_distributions(exponential_data, compressed_exponential, "Exponential Distribution")```
 Results & Observations
 Storage Savings
     1.The compressed binary files are smaller than the original ones.
